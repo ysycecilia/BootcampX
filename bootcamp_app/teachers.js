@@ -19,9 +19,9 @@ pool.query(`
   on students.id = assistance_requests.student_id
   join cohorts
   on cohorts.id = students.cohort_id
-  where cohorts.name = '${input[2]}'
+  where cohorts.name = $1
   order by teacher;
-`).then(res => {
+`,[`${input[2]}`]).then(res => {
   res.rows.forEach(teacher => {
     console.log(`${input[2]}: ${teacher.teacher}`);
   });
